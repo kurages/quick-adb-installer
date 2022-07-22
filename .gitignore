@@ -1,0 +1,6 @@
+__pycache__
+*.zip
+
+usb_driver/
+
+
