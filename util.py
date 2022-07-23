@@ -27,12 +27,13 @@ class Util:
 		with ZipFile(filePath, 'r') as zip:
 			zip.extractall(outputDir)
 
-	def downloadFile(self, url, path):
+	def downloadFile(self, url, path) -> requests.Response:
 		req = requests.get(url)
 		if req.status_code == 200:
 			content = req.content
 			with open(path ,mode='wb') as f:
 				f.write(content)
+		return req
 
 	def _getKeys(self):
 		if self.isSuperUser:
@@ -47,6 +48,7 @@ class Util:
 			)
 
 	def addPath(self, path:str) -> None:
+		# 重複削除と追記
 		existPath = self.getPath()
 		if path[-1] != ";":
 			path+=";"
@@ -70,6 +72,7 @@ class Util:
 		print(msg)
 
 	def isAllow(self, string) -> bool:
+		# y/n の判定
 		if self._yes:
 			return True
 		while True:

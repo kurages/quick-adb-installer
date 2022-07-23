@@ -39,6 +39,7 @@ class Setup:
 		uninstall.set_defaults(handler=Uninstall(uninstall, self.util).run)
 
 	def run(self):
+		# 実行 or ヘルプ表示
 		args = self.parser.parse_args()
 		self.util.setOps(args.silent, args.yes)
 		if hasattr(args, 'handler'):

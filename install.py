@@ -36,6 +36,7 @@ class Install:
 		subprocess.run("PNPUTIL /add-driver usb_driver\\android_winusb.inf /install", shell=True)
 
 	def _installTools(self):
+		# zipの解凍とpathに追加
 		if os.path.exists(self.prefix):
 			shutil.rmtree(self.prefix)
 		self.util.log("Driver deployment now...")
@@ -48,6 +49,7 @@ class Install:
 
 
 	def confirm(self):
+		# インストール確認
 		self.util.log(f"innstall dir: {self.prefix}")
 		if not self.util.isAllow(
 			"Have you checked the terms of use and installation directory for the drivers and "
@@ -57,6 +59,7 @@ class Install:
 			sys.exit(1)
 
 	def clean(self):
+		# dlしたファイル類の削除
 		self.util.log("Temporary files are deleted.")
 		shutil.rmtree("usb_driver")
 		for i in ["usb_driver.zip", "platform-tools.zip"]:
