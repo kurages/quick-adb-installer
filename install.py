@@ -43,6 +43,9 @@ class Install:
 		self.util.log("Installing tools...")
 		shutil.move(r".\platform-tools", self.prefix)
 
+		self.util.log("Adds a install dir to the path")
+		self.util.addPath(self.prefix)
+
 
 	def confirm(self):
 		self.util.log(f"innstall dir: {self.prefix}")
@@ -52,10 +55,6 @@ class Install:
 			+ "[y/n]"
 		):
 			sys.exit(1)
-
-	def addPath(self):
-		path = self.util.getPath()
-		self.util.setPath(f"{self.prefix};{path}")
 
 	def clean(self):
 		self.util.log("Temporary files are deleted.")
@@ -77,7 +76,6 @@ class Install:
 		self._downloadFiles()
 		self._installDriver()
 		self._installTools()
-		self.addPath()
 		self.clean()
 		self.util.log("ok. all complete!")
 

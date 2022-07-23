@@ -46,11 +46,20 @@ class Util:
 				self.USER_PATH_REG
 			)
 
-	def setPath(self, path):
+	def addPath(self, path:str) -> None:
+		existPath = self.getPath()
+		if path[-1] != ";":
+			path+=";"
+		if path in existPath:
+			existPath.replace(path, "")
+		self.setPath(path+existPath)
+
+
+	def setPath(self, path:str) -> None:
 		with winreg.CreateKeyEx(*self._getKeys()) as key:
 			winreg.SetValueEx(key, 'Path', 0, winreg.REG_EXPAND_SZ, path)
 
-	def getPath(self):
+	def getPath(self) -> str:
 		path = None
 		with winreg.OpenKeyEx(*self._getKeys()) as key:
 			path, _ = winreg.QueryValueEx(key, 'Path')
