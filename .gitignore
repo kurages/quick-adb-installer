@@ -3,4 +3,7 @@ __pycache__
 
 usb_driver/
 
+/build/
+/dist/
+
 
